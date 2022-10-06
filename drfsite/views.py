@@ -52,10 +52,10 @@ class FileView(APIView):
 
     def post(self, request, *args, **kwargs):
         file_serializer = FileSerializer(data=request.data)
-        basedir = '/home/oleg' #path to parent dir of test_zadaniye
+        basedir = '/home/oleg/test_zadaniye' #path to parent dir of test_zadaniye. May be different at your pc
         if file_serializer.is_valid():
             file_serializer.save()
-            wb = load_workbook(filename=basedir + '/test_zadaniye'+file_serializer.data.get('file'))
+            wb = load_workbook(filename=basedir + file_serializer.data.get('file'))
             sheet_ranges = wb['Sheet1']
             if Plans.objects.filter(period=sheet_ranges['B2'].value, category_id=sheet_ranges['D2'].value):
                 return Response('This data is already in database')
