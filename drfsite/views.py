@@ -20,19 +20,19 @@ class UsersAPIView(generics.ListAPIView):
 
 class UserCreditsAPIView(generics.ListAPIView):
     """API view for user_credits_<user_id>. It returns all important information on credits of a certain user"""
-    flag = True
-    serializers_classes = (ExampleSerializer, ExampleSerializer)
+    flag = False
+#     serializers_classes = (ExampleSerializer, ExampleSerializer)
 
     # One way to do it
-    def list(self, request, *args, **kwargs):
-        for i in args:
-            print(i.actual_return_date)
-            if i.actual_return_date == '1000-01-01':
-                self.serializer_class = self.serializers_classes[0]
-                return super().list(request, *args, **kwargs)
+#     def list(self, request, *args, **kwargs):
+#         for i in args:
+#             print(i.actual_return_date)
+#             if i.actual_return_date == '1000-01-01':
+#                 self.serializer_class = self.serializers_classes[0]
+#                 return super().list(request, *args, **kwargs)
 
-        self.serializer_class = self.serializers_classes[1]
-        return super().list(request, *args, **kwargs)
+#         self.serializer_class = self.serializers_classes[1]
+#         return super().list(request, *args, **kwargs)
 
     def get_queryset(self):
         user_id = self.kwargs['user_id']
